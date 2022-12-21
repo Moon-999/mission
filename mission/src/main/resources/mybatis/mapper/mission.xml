@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.study.springboot.spring.Mdao">
+	<insert id="addlist">
+		insert into mission values (#{param1},#{param2},#{param3},#{param4},#{param5})
+	</insert>
+	
+	<select id="getList" resultType="com.study.springboot.spring.Mdto">
+		select id, name, gender, country, city from mission 
+	</select>
+	<update id="updatelist">
+		update mission set name=#{param2},gender=#{param3},country=#{param4},city=#{param5} where id=#{param1} 
+	</update>
+	<delete id="deletelist">
+		delete from mission where id=#{param1}
+	</delete>
+	<select id="selectlist" resultType="com.study.springboot.spring.Mdto">
+		select id, name, gender, country, city from mission 
+		<where>
+		<if test='param1 != null and param1 != ""'>AND id = #{param1} </if>
+		<if test='param2 != null and param2 != ""'>AND name = #{param2} </if>
+		<if test='param3 != null and param3 != ""'>AND gender = #{param3} </if>
+		<if test='param4 != null and param4 != "나라"'>AND country = #{param4} </if>
+		<if test='param5 != null and param5 != "도시"'>AND city = #{param5} </if>		
+		<if test='param6 != "" and param7 != ""'>AND created between #{param6} and #{param7} </if>
+		</where>
+		<!-- <if test='param6 != null and param7 != null'>AND created between #{param6} and #{param7} </if>  -->
+	</select>
+
+
+</mapper>
